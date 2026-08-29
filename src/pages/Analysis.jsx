@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Eye,
   ScanSearch,
@@ -10,6 +11,7 @@ import {
 } from "lucide-react";
 
 function Analysis() {
+  const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
 
   const steps = [
@@ -39,21 +41,30 @@ function Analysis() {
       description: "Preparing visual explanation regions.",
     },
   ];
-
   useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((previous) => {
-        if (previous >= 100) {
-          clearInterval(timer);
-          return 100;
-        }
+  const timer = setInterval(() => {
+    setProgress((previous) => {
+      if (previous >= 100) {
+        clearInterval(timer);
+        return 100;
+      }
 
-        return previous + 1;
-      });
-    }, 80);
+      return previous + 1;
+    });
+  }, 80);
 
-    return () => clearInterval(timer);
-  }, []);
+  return () => clearInterval(timer);
+}, []);
+
+useEffect(() => {
+  if (progress === 100) {
+    const redirectTimer = setTimeout(() => {
+      navigate("/results");
+    }, 1200);
+
+    return () => clearTimeout(redirectTimer);
+  }
+}, [progress, navigate]);
 
   /*
     Progress mapping:
