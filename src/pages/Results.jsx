@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import ExplainableViewer from "../components/ExplainableViewer";
+import { Link, useNavigate } from "react-router-dom";
+import { useScreening } from "../context/ScreeningContext";
 
 import {
   Eye,
@@ -10,9 +10,24 @@ import {
   Activity,
   FileText,
   RotateCcw,
+  Image as ImageIcon,
 } from "lucide-react";
 
 function Results() {
+  const navigate = useNavigate();
+
+  const {
+    patient,
+    image,
+    preview,
+    startNewScreening,
+  } = useScreening();
+
+  const handleNewScreening = () => {
+    startNewScreening();
+    navigate("/screening");
+  };
+
   return (
     <div className="results-page">
 
@@ -72,6 +87,33 @@ function Results() {
         </div>
 
 
+        {/* ================= PATIENT INFO ================= */}
+
+        <section className="result-patient-info">
+
+          <div>
+            <span>Patient ID</span>
+            <strong>{patient?.id || "NS-2026-001"}</strong>
+          </div>
+
+          <div>
+            <span>Age</span>
+            <strong>{patient?.age || "—"}</strong>
+          </div>
+
+          <div>
+            <span>Gender</span>
+            <strong>{patient?.gender || "—"}</strong>
+          </div>
+
+          <div>
+            <span>Location</span>
+            <strong>{patient?.location || "Screening Centre"}</strong>
+          </div>
+
+        </section>
+
+
         {/* ================= RESULT SUMMARY ================= */}
 
         <section className="result-summary">
@@ -91,9 +133,8 @@ function Results() {
             </h2>
 
             <p>
-              The AI-assisted screening pipeline did not identify
-              significant diabetic retinopathy indicators in the
-              analyzed image.
+              The frontend demonstration indicates no significant
+              diabetic retinopathy indicators in the analyzed image.
             </p>
 
           </div>
@@ -113,7 +154,7 @@ function Results() {
               <div
                 className="confidence-fill"
                 style={{ width: "94.2%" }}
-              ></div>
+              />
 
             </div>
 
@@ -127,7 +168,7 @@ function Results() {
         <section className="results-grid">
 
 
-          {/* ================= RETINAL IMAGE ================= */}
+          {/* ================= REAL UPLOADED IMAGE ================= */}
 
           <div className="results-card retina-result-card">
 
@@ -156,23 +197,28 @@ function Results() {
             </div>
 
 
-            <div className="result-retina">
+            <div className="result-retina real-retina-image">
 
-              <div className="result-retina-core"></div>
+              {preview ? (
 
-              <div className="result-vessel result-vessel-one"></div>
+                <img
+                  src={preview}
+                  alt="Uploaded retinal fundus"
+                />
 
-              <div className="result-vessel result-vessel-two"></div>
+              ) : (
 
-              <div className="result-vessel result-vessel-three"></div>
+                <div className="no-result-image">
 
-              <div className="result-vessel result-vessel-four"></div>
+                  <ImageIcon size={36} />
 
-              <div className="result-vessel result-vessel-five"></div>
+                  <span>
+                    No retinal image available
+                  </span>
 
-              <span className="result-point result-point-one"></span>
+                </div>
 
-              <span className="result-point result-point-two"></span>
+              )}
 
             </div>
 
@@ -180,7 +226,7 @@ function Results() {
             <div className="retina-caption">
 
               <span>
-                Original retinal image
+                {image?.name || "Retinal fundus image"}
               </span>
 
               <span>
@@ -279,11 +325,48 @@ function Results() {
         </section>
 
 
-        {/* ================================================== */}
-        {/*              EXPLAINABLE AI VIEWER                */}
-        {/* ================================================== */}
+        {/* ================= EXPLAINABLE AI ================= */}
 
-        <ExplainableViewer />
+        <section className="results-card explainable-result-section">
+
+          <div className="card-header">
+
+            <div>
+
+              <span className="card-label">
+                EXPLAINABLE AI
+              </span>
+
+              <h3>
+                Why did the AI make this decision?
+              </h3>
+
+            </div>
+
+          </div>
+
+          <div className="explainable-placeholder">
+
+            <div className="explainable-placeholder-icon">
+              <Eye size={28} />
+            </div>
+
+            <div>
+
+              <h4>
+                Visual explanation
+              </h4>
+
+              <p>
+                Highlighted retinal regions will appear here
+                in the full AI implementation.
+              </p>
+
+            </div>
+
+          </div>
+
+        </section>
 
 
         {/* ================= CLINICAL SUMMARY ================= */}
@@ -323,7 +406,6 @@ function Results() {
               </strong>
             </div>
 
-
             <div>
               <span>
                 DR Grade
@@ -334,7 +416,6 @@ function Results() {
               </strong>
             </div>
 
-
             <div>
               <span>
                 AI Confidence
@@ -344,7 +425,6 @@ function Results() {
                 94.2%
               </strong>
             </div>
-
 
             <div>
               <span>
@@ -381,13 +461,14 @@ function Results() {
 
         <div className="results-actions">
 
-          <Link
-            to="/screening"
+          <button
+            type="button"
             className="secondary-result-button"
+            onClick={handleNewScreening}
           >
             <RotateCcw size={17} />
             New Screening
-          </Link>
+          </button>
 
 
           <Link

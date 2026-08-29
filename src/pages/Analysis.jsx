@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -41,41 +42,31 @@ function Analysis() {
       description: "Preparing visual explanation regions.",
     },
   ];
+
   useEffect(() => {
-  const timer = setInterval(() => {
-    setProgress((previous) => {
-      if (previous >= 100) {
-        clearInterval(timer);
-        return 100;
-      }
+    const timer = setInterval(() => {
+      setProgress((previous) => {
+        if (previous >= 100) {
+          clearInterval(timer);
+          return 100;
+        }
 
-      return previous + 1;
-    });
-  }, 80);
+        return previous + 1;
+      });
+    }, 80);
 
-  return () => clearInterval(timer);
-}, []);
+    return () => clearInterval(timer);
+  }, []);
 
-useEffect(() => {
-  if (progress === 100) {
-    const redirectTimer = setTimeout(() => {
-      navigate("/results");
-    }, 1200);
+  useEffect(() => {
+    if (progress === 100) {
+      const redirectTimer = setTimeout(() => {
+        navigate("/results");
+      }, 1200);
 
-    return () => clearTimeout(redirectTimer);
-  }
-}, [progress, navigate]);
-
-  /*
-    Progress mapping:
-
-    0–19   → Step 1 active
-    20–39  → Step 2 active
-    40–59  → Step 3 active
-    60–79  → Step 4 active
-    80–99  → Step 5 active
-    100    → All steps completed
-  */
+      return () => clearTimeout(redirectTimer);
+    }
+  }, [progress, navigate]);
 
   const currentStep =
     progress >= 100
@@ -84,13 +75,8 @@ useEffect(() => {
 
   return (
     <div className="analysis-page">
-
-      {/* ================= NAVBAR ================= */}
-
       <nav className="analysis-navbar">
-
         <div className="analysis-logo">
-
           <div className="analysis-logo-icon">
             <Eye size={22} />
           </div>
@@ -98,25 +84,16 @@ useEffect(() => {
           <span>
             Netra<span>Scan</span>
           </span>
-
         </div>
 
         <div className="analysis-status">
           <span className="status-dot"></span>
           AI ANALYSIS ACTIVE
         </div>
-
       </nav>
 
-
-      {/* ================= MAIN ================= */}
-
       <main className="analysis-main">
-
-        {/* ================= HEADER ================= */}
-
         <div className="analysis-header">
-
           <span className="analysis-label">
             NETRASCAN AI ENGINE
           </span>
@@ -136,19 +113,13 @@ useEffect(() => {
               ? "The retinal image has completed the AI-assisted screening pipeline."
               : "Our AI-assisted screening pipeline is examining the retinal image for potential diabetic retinopathy indicators."}
           </p>
-
         </div>
 
-
-        {/* ================= RETINA VISUAL ================= */}
-
         <div className="analysis-visual">
-
           <div className="retina-ring ring-one"></div>
           <div className="retina-ring ring-two"></div>
 
           <div className="analysis-retina">
-
             <div className="retina-core"></div>
 
             <div className="retina-vessel vessel-one"></div>
@@ -162,11 +133,9 @@ useEffect(() => {
             <span className="retina-point point-one"></span>
             <span className="retina-point point-two"></span>
             <span className="retina-point point-three"></span>
-
           </div>
 
           <div className="scan-badge">
-
             {progress >= 100 ? (
               <>
                 <CircleCheck size={16} />
@@ -178,44 +147,25 @@ useEffect(() => {
                 RETINAL SCAN
               </>
             )}
-
           </div>
-
         </div>
 
-
-        {/* ================= PROGRESS ================= */}
-
         <div className="analysis-progress">
-
           <div className="progress-header">
-
             <span>Analysis Progress</span>
-
             <strong>{progress}%</strong>
-
           </div>
 
           <div className="progress-track">
-
             <div
               className="progress-bar"
-              style={{
-                width: `${progress}%`,
-              }}
+              style={{ width: `${progress}%` }}
             ></div>
-
           </div>
-
         </div>
 
-
-        {/* ================= ANALYSIS STEPS ================= */}
-
         <div className="analysis-steps">
-
           {steps.map((step, index) => {
-
             const Icon = step.icon;
 
             const completed = index < currentStep;
@@ -231,11 +181,7 @@ useEffect(() => {
                 } ${completed ? "completed" : ""}`}
                 key={step.title}
               >
-
-                {/* ICON */}
-
                 <div className="analysis-step-icon">
-
                   {completed ? (
                     <CircleCheck size={20} />
                   ) : active ? (
@@ -246,62 +192,34 @@ useEffect(() => {
                   ) : (
                     <Icon size={20} />
                   )}
-
                 </div>
-
-
-                {/* CONTENT */}
 
                 <div className="analysis-step-content">
+                  <strong>{step.title}</strong>
 
-                  <strong>
-                    {step.title}
-                  </strong>
-
-                  <span>
-                    {step.description}
-                  </span>
-
+                  <span>{step.description}</span>
                 </div>
-
-
-                {/* NUMBER */}
 
                 <div className="analysis-step-number">
-
                   {String(index + 1).padStart(2, "0")}
-
                 </div>
-
               </div>
             );
-
           })}
-
         </div>
 
-
-        {/* ================= DISCLAIMER ================= */}
-
         <div className="analysis-disclaimer">
-
           <ShieldIcon />
 
           <span>
-            AI-assisted screening prototype •
-            Results require professional clinical review.
+            AI-assisted screening prototype • Results require
+            professional clinical review.
           </span>
-
         </div>
-
       </main>
-
     </div>
   );
 }
-
-
-/* ================= SHIELD ================= */
 
 function ShieldIcon() {
   return (
