@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
+import ExplainableViewer from "../components/ExplainableViewer";
+
 import {
   Eye,
   ArrowLeft,
   Download,
   CircleCheck,
   AlertTriangle,
-  Brain,
-  ScanSearch,
   Activity,
   FileText,
   RotateCcw,
@@ -44,7 +44,7 @@ function Results() {
 
       <main className="results-main">
 
-        {/* HEADER */}
+        {/* ================= HEADER ================= */}
 
         <div className="results-header">
 
@@ -100,15 +100,21 @@ function Results() {
 
           <div className="result-confidence">
 
-            <span>AI CONFIDENCE</span>
+            <span>
+              AI CONFIDENCE
+            </span>
 
-            <strong>94.2%</strong>
+            <strong>
+              94.2%
+            </strong>
 
             <div className="confidence-track">
+
               <div
                 className="confidence-fill"
                 style={{ width: "94.2%" }}
               ></div>
+
             </div>
 
           </div>
@@ -121,13 +127,14 @@ function Results() {
         <section className="results-grid">
 
 
-          {/* ================= RETINA IMAGE ================= */}
+          {/* ================= RETINAL IMAGE ================= */}
 
           <div className="results-card retina-result-card">
 
             <div className="card-header">
 
               <div>
+
                 <span className="card-label">
                   RETINAL IMAGE
                 </span>
@@ -135,11 +142,15 @@ function Results() {
                 <h3>
                   Analyzed fundus image
                 </h3>
+
               </div>
 
               <span className="image-quality-badge">
+
                 <CircleCheck size={14} />
+
                 Good Quality
+
               </span>
 
             </div>
@@ -150,12 +161,17 @@ function Results() {
               <div className="result-retina-core"></div>
 
               <div className="result-vessel result-vessel-one"></div>
+
               <div className="result-vessel result-vessel-two"></div>
+
               <div className="result-vessel result-vessel-three"></div>
+
               <div className="result-vessel result-vessel-four"></div>
+
               <div className="result-vessel result-vessel-five"></div>
 
               <span className="result-point result-point-one"></span>
+
               <span className="result-point result-point-two"></span>
 
             </div>
@@ -176,13 +192,14 @@ function Results() {
           </div>
 
 
-          {/* ================= GRADING ================= */}
+          {/* ================= DR GRADING ================= */}
 
           <div className="results-card grading-card">
 
             <div className="card-header">
 
               <div>
+
                 <span className="card-label">
                   DR GRADING
                 </span>
@@ -190,6 +207,7 @@ function Results() {
                 <h3>
                   Screening classification
                 </h3>
+
               </div>
 
               <Activity size={20} />
@@ -201,7 +219,9 @@ function Results() {
 
               <div className="grading-circle">
 
-                <strong>0</strong>
+                <strong>
+                  0
+                </strong>
 
                 <span>
                   Grade
@@ -256,124 +276,14 @@ function Results() {
 
           </div>
 
-
         </section>
 
 
-        {/* ================= EXPLAINABLE AI ================= */}
+        {/* ================================================== */}
+        {/*              EXPLAINABLE AI VIEWER                */}
+        {/* ================================================== */}
 
-        <section className="explainable-section">
-
-          <div className="section-heading">
-
-            <div>
-
-              <span className="card-label">
-                EXPLAINABLE AI
-              </span>
-
-              <h2>
-                Why did the AI make this assessment?
-              </h2>
-
-              <p>
-                NetraScan provides visual and feature-level
-                explanations instead of presenting a black-box result.
-              </p>
-
-            </div>
-
-            <div className="explainable-icon">
-              <Brain size={22} />
-            </div>
-
-          </div>
-
-
-          <div className="explanation-grid">
-
-
-            <div className="explanation-card">
-
-              <div className="explanation-icon">
-                <ScanSearch size={20} />
-              </div>
-
-              <div>
-
-                <strong>
-                  Image Quality
-                </strong>
-
-                <p>
-                  Brightness, contrast and retinal visibility were
-                  suitable for analysis.
-                </p>
-
-              </div>
-
-              <span className="explanation-score">
-                Good
-              </span>
-
-            </div>
-
-
-            <div className="explanation-card">
-
-              <div className="explanation-icon">
-                <Eye size={20} />
-              </div>
-
-              <div>
-
-                <strong>
-                  Retinal Structures
-                </strong>
-
-                <p>
-                  Optic disc, retinal vessels and major structures
-                  were successfully identified.
-                </p>
-
-              </div>
-
-              <span className="explanation-score">
-                Clear
-              </span>
-
-            </div>
-
-
-            <div className="explanation-card">
-
-              <div className="explanation-icon">
-                <Activity size={20} />
-              </div>
-
-              <div>
-
-                <strong>
-                  Lesion Indicators
-                </strong>
-
-                <p>
-                  No significant suspicious lesion regions were
-                  identified in this screening example.
-                </p>
-
-              </div>
-
-              <span className="explanation-score">
-                Low
-              </span>
-
-            </div>
-
-
-          </div>
-
-        </section>
+        <ExplainableViewer />
 
 
         {/* ================= CLINICAL SUMMARY ================= */}
@@ -404,22 +314,43 @@ function Results() {
           <div className="summary-items">
 
             <div>
-              <span>Image Quality</span>
-              <strong>Good</strong>
+              <span>
+                Image Quality
+              </span>
+
+              <strong>
+                Good
+              </strong>
             </div>
 
-            <div>
-              <span>DR Grade</span>
-              <strong>0 — No DR</strong>
-            </div>
 
             <div>
-              <span>AI Confidence</span>
-              <strong>94.2%</strong>
+              <span>
+                DR Grade
+              </span>
+
+              <strong>
+                0 — No DR
+              </strong>
             </div>
 
+
             <div>
-              <span>Analysis Status</span>
+              <span>
+                AI Confidence
+              </span>
+
+              <strong>
+                94.2%
+              </strong>
+            </div>
+
+
+            <div>
+              <span>
+                Analysis Status
+              </span>
+
               <strong className="summary-success">
                 Complete
               </strong>
@@ -450,12 +381,19 @@ function Results() {
 
         <div className="results-actions">
 
-          <Link to="/screening" className="secondary-result-button">
+          <Link
+            to="/screening"
+            className="secondary-result-button"
+          >
             <RotateCcw size={17} />
             New Screening
           </Link>
 
-          <Link to="/report" className="primary-result-button">
+
+          <Link
+            to="/report"
+            className="primary-result-button"
+          >
             <FileText size={17} />
             View Full Report
           </Link>
