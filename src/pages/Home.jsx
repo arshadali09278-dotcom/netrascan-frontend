@@ -27,8 +27,18 @@ function Home() {
 
   /* =========================================================
      START SCREENING
-     PHC LOGIN IS REQUIRED
-     ========================================================= */
+     =========================================================
+     
+     PHC LOGIN IS REQUIRED.
+
+     If PHC is not logged in:
+       → Login page
+
+     If PHC is logged in:
+       → Directly to Start a Retinal Screening page
+
+     The old Patient ID page is completely skipped.
+  */
 
   const handleStartScreening = () => {
     if (!phc) {
@@ -36,7 +46,7 @@ function Home() {
       return;
     }
 
-    navigate("/patient-id");
+    navigate("/screening");
   };
 
 
@@ -73,7 +83,10 @@ function Home() {
             </div>
 
             <span>
-              Netra<span className="logo-highlight">Scan</span>
+              Netra
+              <span className="logo-highlight">
+                Scan
+              </span>
             </span>
 
           </Link>
@@ -107,7 +120,6 @@ function Home() {
              ================================================= */}
 
           <div className="nav-actions">
-
 
             {/* =================================================
                PHC USER MENU
@@ -163,7 +175,6 @@ function Home() {
 
                   <div className="phc-dropdown">
 
-
                     {/* ================= HEADER ================= */}
 
                     <div className="phc-dropdown-header">
@@ -200,7 +211,6 @@ function Home() {
                     {/* ================= PHC INFORMATION ================= */}
 
                     <div className="phc-info">
-
 
                       {/* PHC ID */}
 
@@ -344,7 +354,6 @@ function Home() {
         >
 
           <div className="hero-container">
-
 
             {/* ================= LEFT ================= */}
 
@@ -541,7 +550,6 @@ function Home() {
 
           <div className="value-container">
 
-
             {/* CARD 1 */}
 
             <div className="value-card">
@@ -638,7 +646,6 @@ function Home() {
 
           <div className="section-container">
 
-
             <div className="section-heading">
 
               <span className="section-label">
@@ -672,7 +679,6 @@ function Home() {
             {/* ================= WORKFLOW ================= */}
 
             <div className="workflow-preview">
-
 
               <div className="workflow-item">
 
@@ -776,7 +782,6 @@ function Home() {
 
           <div className="section-container">
 
-
             <div className="section-heading centered">
 
               <span className="section-label">
@@ -804,7 +809,6 @@ function Home() {
 
 
             <div className="steps-grid">
-
 
               {/* STEP 1 */}
 
@@ -911,7 +915,6 @@ function Home() {
 
           <div className="section-container">
 
-
             <div className="section-heading">
 
               <span className="section-label">
@@ -933,7 +936,6 @@ function Home() {
 
 
             <div className="features-grid">
-
 
               {/* FEATURE 1 */}
 
@@ -1058,7 +1060,6 @@ function Home() {
 
           <div className="cta-container">
 
-
             <div>
 
               <span className="section-label">
@@ -1113,7 +1114,6 @@ function Home() {
       <footer className="footer">
 
         <div className="footer-container">
-
 
           <div className="footer-brand">
 
@@ -1193,7 +1193,7 @@ function Home() {
 
         </div>
 
-      </footer>
+      </footer>git status
 
     </div>
   );
