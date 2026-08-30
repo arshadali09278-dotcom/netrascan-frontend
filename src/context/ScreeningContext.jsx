@@ -3,91 +3,105 @@ import { createContext, useContext, useState } from "react";
 const ScreeningContext = createContext(null);
 
 export function ScreeningProvider({ children }) {
-const [patient, setPatient] = useState({
-id: "",
-age: "",
-gender: "",
-location: "",
-});
+  const [patient, setPatient] = useState({
+    id: "",
+    age: "",
+    gender: "",
+    location: "",
+  });
 
-const [image, setImage] = useState(null);
-const [preview, setPreview] = useState(null);
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [analysisResult, setAnalysisResult] = useState(null);
 
-const [analysisResult, setAnalysisResult] = useState(null);
+  // ================= PHC LOGIN =================
 
-const startNewScreening = () => {
-setPatient({
-id: "",
-age: "",
-gender: "",
-location: "",
-});
+  const [phc, setPhc] = useState(() => {
+    const savedPhc = localStorage.getItem("netrascan_phc");
 
-```
-setImage(null);
-setPreview(null);
-setAnalysisResult(null);
-```
+    return savedPhc
+      ? JSON.parse(savedPhc)
+      : null;
+  });
 
-};
+  const loginPhc = (phcData) => {
+    setPhc(phcData);
+    localStorage.setItem("netrascan_phc", JSON.stringify(phcData));
+  };
 
-const saveImage = (file) => {
-if (!file) return;
+  const logoutPhc = () => {
+    setPhc(null);
+    localStorage.removeItem("netrascan_phc");
+  };
 
-```
-setImage(file);
+  // ================= SCREENING =================
 
-const imageUrl = URL.createObjectURL(file);
-setPreview(imageUrl);
-```
+  const startNewScreening = () => {
+    setPatient({
+      id: "",
+      age: "",
+      gender: "",
+      location: "",
+    });
 
-};
+    setImage(null);
+    setPreview(null);
+    setAnalysisResult(null);
+  };
 
-const clearImage = () => {
-if (preview) {
-URL.revokeObjectURL(preview);
-}
+  const saveImage = (file) => {
+    if (!file) return;
 
-```
-setImage(null);
-setPreview(null);
-```
+    setImage(file);
 
-};
+    const imageUrl = URL.createObjectURL(file);
+    setPreview(imageUrl);
+  };
 
-const value = {
-patient,
-setPatient,
+  const clearImage = () => {
+    if (preview) {
+      URL.revokeObjectURL(preview);
+    }
 
+    setImage(null);
+    setPreview(null);
+  };
 
-image,
-preview,
-saveImage,
-clearImage,
+  const value = {
+    patient,
+    setPatient,
 
-analysisResult,
-setAnalysisResult,
+    image,
+    preview,
+    saveImage,
+    clearImage,
 
-startNewScreening,
+    analysisResult,
+    setAnalysisResult,
 
+    startNewScreening,
 
-};
+    // PHC
+    phc,
+    loginPhc,
+    logoutPhc,
+  };
 
-return (
-<ScreeningContext.Provider value={value}>
-{children}
-</ScreeningContext.Provider>
-);
+  return (
+    <ScreeningContext.Provider value={value}>
+      {children}
+    </ScreeningContext.Provider>
+  );
 }
 
 export function useScreening() {
-const context = useContext(ScreeningContext);
+  const context = useContext(ScreeningContext);
 
-if (!context) {
-throw new Error(
-"useScreening must be used inside ScreeningProvider"
-);
-}
+  if (!context) {
+    throw new Error(
+      "useScreening must be used inside ScreeningProvider"
+    );
+  }
 
-return context;
+  return context;
 }
