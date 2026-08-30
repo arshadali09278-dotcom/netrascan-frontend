@@ -29,15 +29,13 @@ function Home() {
      START SCREENING
      =========================================================
      
-     PHC LOGIN IS REQUIRED.
+     PHC LOGIN REQUIRED
 
-     If PHC is not logged in:
-       → Login page
+     Logged in:
+       → Start Retinal Screening page
 
-     If PHC is logged in:
-       → Directly to Start a Retinal Screening page
-
-     The old Patient ID page is completely skipped.
+     Not logged in:
+       → PHC Login page
   */
 
   const handleStartScreening = () => {
@@ -49,19 +47,15 @@ function Home() {
     navigate("/screening");
   };
 
-
   /* =========================================================
      LOGOUT
      ========================================================= */
 
   const handleLogout = () => {
     setShowPhcMenu(false);
-
     logoutPhc();
-
     navigate("/login");
   };
-
 
   return (
     <div className="home-page">
@@ -71,24 +65,19 @@ function Home() {
          ===================================================== */}
 
       <nav className="navbar">
-
         <div className="nav-container">
 
           {/* ================= LOGO ================= */}
 
           <Link to="/home" className="logo">
-
             <div className="logo-icon">
               <Eye size={23} />
             </div>
 
             <span>
               Netra
-              <span className="logo-highlight">
-                Scan
-              </span>
+              <span className="logo-highlight">Scan</span>
             </span>
-
           </Link>
 
 
@@ -115,21 +104,15 @@ function Home() {
           </div>
 
 
-          {/* =================================================
-             NAV ACTIONS
-             ================================================= */}
+          {/* ================= RIGHT SIDE ================= */}
 
           <div className="nav-actions">
-
-            {/* =================================================
-               PHC USER MENU
-               ================================================= */}
 
             {phc ? (
 
               <div className="phc-user-wrapper">
 
-                {/* ================= USER BUTTON ================= */}
+                {/* ================= PHC BUTTON ================= */}
 
                 <button
                   type="button"
@@ -143,7 +126,6 @@ function Home() {
                     <Building2 size={17} />
                   </div>
 
-
                   <div className="phc-user-text">
 
                     <strong>
@@ -156,7 +138,6 @@ function Home() {
 
                   </div>
 
-
                   <ChevronDown
                     size={16}
                     className={`phc-chevron ${
@@ -167,22 +148,19 @@ function Home() {
                 </button>
 
 
-                {/* =================================================
-                   PHC DROPDOWN
-                   ================================================= */}
+                {/* ================= PHC DROPDOWN ================= */}
 
                 {showPhcMenu && (
 
                   <div className="phc-dropdown">
 
-                    {/* ================= HEADER ================= */}
+                    {/* HEADER */}
 
                     <div className="phc-dropdown-header">
 
                       <div className="phc-dropdown-icon">
                         <Building2 size={21} />
                       </div>
-
 
                       <div className="phc-dropdown-header-text">
 
@@ -196,7 +174,6 @@ function Home() {
 
                       </div>
 
-
                       <div className="phc-status">
 
                         <span className="phc-status-dot"></span>
@@ -208,7 +185,7 @@ function Home() {
                     </div>
 
 
-                    {/* ================= PHC INFORMATION ================= */}
+                    {/* INFORMATION */}
 
                     <div className="phc-info">
 
@@ -277,12 +254,12 @@ function Home() {
                     </div>
 
 
-                    {/* ================= DIVIDER ================= */}
+                    {/* DIVIDER */}
 
                     <div className="phc-dropdown-divider"></div>
 
 
-                    {/* ================= LOGOUT ================= */}
+                    {/* LOGOUT */}
 
                     <button
                       type="button"
@@ -302,12 +279,9 @@ function Home() {
 
               </div>
 
-
             ) : (
 
-              /* =================================================
-                 PHC LOGIN
-                 ================================================= */
+              /* ================= PHC LOGIN ================= */
 
               <Link
                 to="/login"
@@ -319,9 +293,7 @@ function Home() {
             )}
 
 
-            {/* =================================================
-               START SCREENING
-               ================================================= */}
+            {/* ================= START SCREENING ================= */}
 
             <button
               type="button"
@@ -338,15 +310,18 @@ function Home() {
           </div>
 
         </div>
-
       </nav>
 
 
       {/* =====================================================
-         HERO
+         MAIN CONTENT
          ===================================================== */}
 
       <main>
+
+        {/* =====================================================
+           HERO
+           ===================================================== */}
 
         <section
           className="hero-section"
@@ -396,7 +371,7 @@ function Home() {
               </p>
 
 
-              {/* ================= HERO BUTTONS ================= */}
+              {/* HERO BUTTONS */}
 
               <div className="hero-buttons">
 
@@ -423,6 +398,8 @@ function Home() {
               </div>
 
 
+              {/* HERO NOTE */}
+
               <div className="hero-note">
 
                 <ShieldCheck size={16} />
@@ -444,55 +421,43 @@ function Home() {
 
               <div className="retina-glow"></div>
 
-
               <div className="retina-circle">
 
                 <div className="retina-core"></div>
 
 
-                {/* ================= RETINA VESSELS ================= */}
+                {/* RETINA VESSELS */}
 
                 <div className="vessel vessel-1"></div>
-
                 <div className="vessel vessel-2"></div>
-
                 <div className="vessel vessel-3"></div>
-
                 <div className="vessel vessel-4"></div>
-
                 <div className="vessel vessel-5"></div>
-
                 <div className="vessel vessel-6"></div>
 
 
-                {/* ================= AI SCAN ================= */}
+                {/* AI SCAN */}
 
                 <div className="scan-line"></div>
 
 
-                {/* ================= DETECTION POINTS ================= */}
+                {/* DETECTION POINTS */}
 
                 <span className="detection-point point-1"></span>
-
                 <span className="detection-point point-2"></span>
-
                 <span className="detection-point point-3"></span>
-
                 <span className="detection-point point-4"></span>
 
               </div>
 
 
-              {/* ================= ANALYSIS CARD ================= */}
+              {/* ANALYSIS CARD */}
 
               <div className="analysis-card">
 
                 <div className="analysis-icon">
-
                   <ScanSearch size={20} />
-
                 </div>
-
 
                 <div>
 
@@ -506,7 +471,6 @@ function Home() {
 
                 </div>
 
-
                 <CircleCheck
                   className="check-icon"
                   size={21}
@@ -515,7 +479,7 @@ function Home() {
               </div>
 
 
-              {/* ================= QUALITY CARD ================= */}
+              {/* QUALITY CARD */}
 
               <div className="quality-card">
 
@@ -550,16 +514,11 @@ function Home() {
 
           <div className="value-container">
 
-            {/* CARD 1 */}
-
             <div className="value-card">
 
               <div className="value-icon">
-
                 <ScanSearch size={22} />
-
               </div>
-
 
               <div>
 
@@ -577,16 +536,11 @@ function Home() {
             </div>
 
 
-            {/* CARD 2 */}
-
             <div className="value-card">
 
               <div className="value-icon">
-
                 <Brain size={22} />
-
               </div>
-
 
               <div>
 
@@ -604,16 +558,11 @@ function Home() {
             </div>
 
 
-            {/* CARD 3 */}
-
             <div className="value-card">
 
               <div className="value-icon">
-
                 <Eye size={22} />
-
               </div>
-
 
               <div>
 
@@ -652,7 +601,6 @@ function Home() {
                 THE CHALLENGE
               </span>
 
-
               <h2>
 
                 Making retinal screening
@@ -662,7 +610,6 @@ function Home() {
                 </span>
 
               </h2>
-
 
               <p>
 
@@ -676,7 +623,7 @@ function Home() {
             </div>
 
 
-            {/* ================= WORKFLOW ================= */}
+            {/* WORKFLOW */}
 
             <div className="workflow-preview">
 
@@ -788,7 +735,6 @@ function Home() {
                 HOW IT WORKS
               </span>
 
-
               <h2>
 
                 From retinal image to
@@ -799,7 +745,6 @@ function Home() {
 
               </h2>
 
-
               <p>
                 A simple workflow designed for healthcare
                 screening environments.
@@ -809,8 +754,6 @@ function Home() {
 
 
             <div className="steps-grid">
-
-              {/* STEP 1 */}
 
               <div className="step-card">
 
@@ -832,8 +775,6 @@ function Home() {
               </div>
 
 
-              {/* STEP 2 */}
-
               <div className="step-card">
 
                 <div className="step-number">
@@ -854,8 +795,6 @@ function Home() {
               </div>
 
 
-              {/* STEP 3 */}
-
               <div className="step-card">
 
                 <div className="step-number">
@@ -875,8 +814,6 @@ function Home() {
 
               </div>
 
-
-              {/* STEP 4 */}
 
               <div className="step-card">
 
@@ -921,7 +858,6 @@ function Home() {
                 CORE CAPABILITIES
               </span>
 
-
               <h2>
 
                 Built for
@@ -936,8 +872,6 @@ function Home() {
 
 
             <div className="features-grid">
-
-              {/* FEATURE 1 */}
 
               <div className="feature-card">
 
@@ -954,8 +888,6 @@ function Home() {
 
               </div>
 
-
-              {/* FEATURE 2 */}
 
               <div className="feature-card">
 
@@ -974,8 +906,6 @@ function Home() {
               </div>
 
 
-              {/* FEATURE 3 */}
-
               <div className="feature-card">
 
                 <Eye size={25} />
@@ -991,8 +921,6 @@ function Home() {
 
               </div>
 
-
-              {/* FEATURE 4 */}
 
               <div className="feature-card">
 
@@ -1010,8 +938,6 @@ function Home() {
               </div>
 
 
-              {/* FEATURE 5 */}
-
               <div className="feature-card">
 
                 <Activity size={25} />
@@ -1027,8 +953,6 @@ function Home() {
 
               </div>
 
-
-              {/* FEATURE 6 */}
 
               <div className="feature-card highlight-feature">
 
@@ -1066,7 +990,6 @@ function Home() {
                 BEGIN SCREENING
               </span>
 
-
               <h2>
 
                 Start with a retinal image.
@@ -1078,7 +1001,6 @@ function Home() {
                 </span>
 
               </h2>
-
 
               <p>
                 Explore the NetraScan AI-assisted
@@ -1115,6 +1037,8 @@ function Home() {
 
         <div className="footer-container">
 
+          {/* ================= FOOTER BRAND ================= */}
+
           <div className="footer-brand">
 
             <Link
@@ -1123,24 +1047,17 @@ function Home() {
             >
 
               <div className="logo-icon">
-
                 <Eye size={20} />
-
               </div>
 
-
               <span>
-
                 Netra
-
                 <span className="logo-highlight">
                   Scan
                 </span>
-
               </span>
 
             </Link>
-
 
             <p>
               AI-assisted retinal screening interface.
@@ -1148,6 +1065,8 @@ function Home() {
 
           </div>
 
+
+          {/* ================= FOOTER LINKS ================= */}
 
           <div className="footer-links">
 
@@ -1163,13 +1082,6 @@ function Home() {
               Features
             </a>
 
-            <button
-              type="button"
-              onClick={handleStartScreening}
-            >
-              Screening
-            </button>
-
             <Link to="/login">
               PHC Login
             </Link>
@@ -1179,12 +1091,13 @@ function Home() {
         </div>
 
 
+        {/* ================= FOOTER BOTTOM ================= */}
+
         <div className="footer-bottom">
 
           <span>
             © 2026 NetraScan. Hackathon prototype.
           </span>
-
 
           <span>
             NetraScan does not replace professional
@@ -1193,7 +1106,7 @@ function Home() {
 
         </div>
 
-      </footer>git status
+      </footer>
 
     </div>
   );
