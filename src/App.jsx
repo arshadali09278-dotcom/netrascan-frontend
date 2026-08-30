@@ -1,7 +1,8 @@
-
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { ScreeningProvider, useScreening } from "./context/ScreeningContext";
+
+// ================= PHC PAGES =================
 
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -11,13 +12,29 @@ import Analysis from "./pages/Analysis";
 import Results from "./pages/Results";
 import Report from "./pages/Report";
 
-// ================= PROTECTED ROUTE =================
+// ================= DOCTOR PAGES =================
+
+import DoctorLogin from "./pages/doctor/DoctorLogin";
+
+// ================= PHC PROTECTED ROUTE =================
 
 function ProtectedRoute({ children }) {
   const { phc } = useScreening();
 
   if (!phc) {
     return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
+
+// ================= DOCTOR PROTECTED ROUTE =================
+
+function DoctorProtectedRoute({ children }) {
+  const doctorLoggedIn = localStorage.getItem("doctorLoggedIn");
+
+  if (!doctorLoggedIn) {
+    return <Navigate to="/doctor/login" replace />;
   }
 
   return children;
@@ -31,10 +48,17 @@ function App() {
       <BrowserRouter>
         <Routes>
 
-          {/* PHC LOGIN */}
-          <Route path="/login" element={<Login />} />
+          {/* ==================================================
+              PHC PORTAL
+              ================================================== */}
 
-          {/* PHC HOME / PORTAL */}
+          {/* PHC LOGIN */}
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+
+          {/* PHC HOME */}
           <Route
             path="/home"
             element={
@@ -94,7 +118,21 @@ function App() {
             }
           />
 
-          {/* ROOT → LOGIN */}
+          {/* ==================================================
+              DOCTOR PORTAL
+              ================================================== */}
+
+          {/* DOCTOR LOGIN */}
+          <Route
+            path="/doctor/login"
+            element={<DoctorLogin />}
+          />
+
+          {/* ==================================================
+              DEFAULT ROUTES
+              ================================================== */}
+
+          {/* ROOT → PHC LOGIN */}
           <Route
             path="/"
             element={<Navigate to="/login" replace />}

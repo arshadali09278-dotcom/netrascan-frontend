@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   ScanSearch,
   Activity,
+  Stethoscope,
 } from "lucide-react";
 
 import { useScreening } from "../context/ScreeningContext";
@@ -78,7 +79,6 @@ function Login() {
 
       </nav>
 
-
       {/* ================= MAIN ================= */}
       <main className="login-main">
 
@@ -103,7 +103,6 @@ function Login() {
               early detection of diabetic retinopathy.
             </p>
 
-
             {/* Features */}
             <div className="login-features">
 
@@ -124,7 +123,6 @@ function Login() {
 
               </div>
 
-
               <div className="login-feature">
 
                 <div className="login-feature-icon">
@@ -141,7 +139,6 @@ function Login() {
                 </div>
 
               </div>
-
 
               <div className="login-feature">
 
@@ -163,7 +160,6 @@ function Login() {
             </div>
 
           </section>
-
 
           {/* ================= LOGIN CARD ================= */}
           <section className="login-card">
@@ -192,7 +188,6 @@ function Login() {
 
             </div>
 
-
             <form onSubmit={handleLogin}>
 
               {/* PHC ID */}
@@ -218,7 +213,6 @@ function Login() {
 
               </div>
 
-
               {/* Password */}
               <div className="login-field">
 
@@ -242,7 +236,6 @@ function Login() {
 
               </div>
 
-
               {/* Error */}
               {error && (
                 <div className="login-error">
@@ -250,8 +243,7 @@ function Login() {
                 </div>
               )}
 
-
-              {/* Button */}
+              {/* PHC Button */}
               <button
                 type="submit"
                 className="login-submit-button"
@@ -262,6 +254,30 @@ function Login() {
 
             </form>
 
+            {/* ================= DOCTOR ACCESS ================= */}
+            <div className="doctor-access">
+
+              <div className="doctor-access-divider">
+                <span></span>
+                <small>OR</small>
+                <span></span>
+              </div>
+
+              <p>
+                Are you a Doctor?
+              </p>
+
+              <button
+                type="button"
+                className="doctor-access-button"
+                onClick={() => navigate("/doctor/login")}
+              >
+                <Stethoscope size={18} />
+                <span>Access Doctor Portal</span>
+                <ArrowRight size={17} />
+              </button>
+
+            </div>
 
             {/* Security */}
             <div className="login-card-footer">
